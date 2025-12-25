@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Khmer&family=Noto+Sans+Khmer:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans Khmer', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-family: 'Noto Sans Khmer', 'Khmer', serif;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+        }
+        
+        .exit-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 24px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .exit-btn:hover {
+            background: #c0392b;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All Evaluation Results / លទ្ធផលការវាយតម្លៃទាំងអស់</h1>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Employee / មន្ត្រី</th>
+                    <th>Total Score / ពិន្ទុសរុប</th>
+                    <th>Average Score / ពិន្ទុមធ្យម</th>
+                    <th>Date / កាលបរិច្ឆេទ</th>
+                </tr>
+            </thead>
+            <tbody id="resultsBody">
+                <!-- Results will be populated by JavaScript -->
+            </tbody>
+        </table>
+        <button class="exit-btn" onclick="window.location.href='about:blank'">Exit / ចាកចេញ</button>
+    </div>
+    
+    <footer>
+        <p>Evaluation System &copy; 2025</p>
+        <p>ប្រព័ន្ធវាយតម្លៃប្រសិទ្ធភាពមន្ត្រី</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultsBody = document.getElementById('resultsBody');
+            const evaluations = JSON.parse(localStorage.getItem('evaluations') || '[]');
+            
+            if (evaluations.length === 0) {
+                resultsBody.innerHTML = '<tr><td colspan="4" style="text-align: center;">No evaluations found / មិនមានការវាយតម្លៃ</td></tr>';
+            } else {
+                resultsBody.innerHTML = evaluations.map(eval => 
+                    `<tr>
+                        <td>${eval.employee}</td>
+                        <td>${eval.totalScore}/60</td>
+                        <td>${eval.averageScore}/5</td>
+                        <td>${eval.date}</td>
+                    </tr>`
+                ).join('');
+            }
+        });
+    </script>
+</body>
+</html>
